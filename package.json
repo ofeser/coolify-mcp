@@ -1,0 +1,48 @@
+{
+  "name": "coolify-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for the Coolify API — manage servers, applications, databases, services, deployments, and more through AI assistants",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "coolify-mcp": "src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "coolify",
+    "model-context-protocol",
+    "claude",
+    "ai",
+    "devops",
+    "self-hosted",
+    "server-management",
+    "deployment",
+    "docker"
+  ],
+  "author": "Omer Faruk Eser",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omerfarukeser/coolify-mcp.git"
+  },
+  "homepage": "https://github.com/omerfarukeser/coolify-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/omerfarukeser/coolify-mcp/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0"
+  }
+}
