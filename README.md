@@ -1,6 +1,6 @@
 # coolify-mcp
 
-[![npm version](https://img.shields.io/npm/v/coolify-mcp.svg)](https://www.npmjs.com/package/coolify-mcp)
+[![npm version](https://img.shields.io/npm/v/@ofeser/coolify-mcp.svg)](https://www.npmjs.com/package/@ofeser/coolify-mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 MCP (Model Context Protocol) server for the [Coolify](https://coolify.io) API. Manage your self-hosted infrastructure — servers, applications, databases, services, and deployments — through AI assistants like Claude.
@@ -16,7 +16,7 @@ No installation needed. Configure your MCP client:
   "mcpServers": {
     "coolify": {
       "command": "npx",
-      "args": ["-y", "coolify-mcp"],
+      "args": ["-y", "@ofeser/coolify-mcp"],
       "env": {
         "COOLIFY_API_URL": "https://your-coolify-instance.com",
         "COOLIFY_API_TOKEN": "your-api-token"
@@ -29,7 +29,7 @@ No installation needed. Configure your MCP client:
 ### Global install
 
 ```bash
-npm install -g coolify-mcp
+npm install -g @ofeser/coolify-mcp
 ```
 
 Then use `coolify-mcp` as the command in your MCP client configuration.
@@ -59,7 +59,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
   "mcpServers": {
     "coolify": {
       "command": "npx",
-      "args": ["-y", "coolify-mcp"],
+      "args": ["-y", "@ofeser/coolify-mcp"],
       "env": {
         "COOLIFY_API_URL": "https://your-coolify-instance.com",
         "COOLIFY_API_TOKEN": "your-api-token"
@@ -72,7 +72,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 ### Claude Code
 
 ```bash
-claude mcp add coolify -- npx -y coolify-mcp
+claude mcp add coolify -- npx -y @ofeser/coolify-mcp
 ```
 
 Then set the environment variables in your shell or `.env` file.
@@ -86,7 +86,7 @@ Add to `.cursor/mcp.json` in your project:
   "mcpServers": {
     "coolify": {
       "command": "npx",
-      "args": ["-y", "coolify-mcp"],
+      "args": ["-y", "@ofeser/coolify-mcp"],
       "env": {
         "COOLIFY_API_URL": "https://your-coolify-instance.com",
         "COOLIFY_API_TOKEN": "your-api-token"

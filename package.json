@@ -1,5 +1,5 @@
 {
-  "name": "coolify-mcp",
+  "name": "@ofeser/coolify-mcp",
   "version": "1.0.0",
   "description": "MCP server for the Coolify API — manage servers, applications, databases, services, deployments, and more through AI assistants",
   "type": "module",
