@@ -12,30 +12,39 @@ export function registerEnvVarTools(server) {
       uuid: z.string().describe("Resource UUID"),
       key: z.string().optional(),
       value: z.string().optional(),
-      is_build_time: z.boolean().optional(),
+      is_preview: z.boolean().optional().describe("Whether this env var is for preview deployments"),
+      is_literal: z.boolean().optional(),
+      is_multiline: z.boolean().optional(),
+      is_shown_once: z.boolean().optional(),
       env_uuid: z.string().optional().describe("Env var UUID (for delete)"),
-      data: z.record(z.any()).optional().describe("Bulk update data (for update_bulk)"),
+      data: z.record(z.any()).optional().describe("Bulk update data (for update_bulk). Format: { data: [{ key, value, is_preview, is_literal, is_multiline, is_shown_once }] }"),
     },
-    async ({ action, resource, uuid, key, value, is_build_time, env_uuid, data }) => {
+    async ({ action, resource, uuid, key, value, is_preview, is_literal, is_multiline, is_shown_once, env_uuid, data }) => {
       const basePath = `/${resource}/${uuid}/envs`;
       switch (action) {
         case "list":
           return ok(await coolifyFetch(basePath));
-        case "create":
-          return ok(await coolifyFetch(basePath, {
-            method: "POST",
-            body: { key, value, is_build_time: is_build_time || false },
-          }));
-        case "update":
-          return ok(await coolifyFetch(basePath, {
-            method: "PATCH",
-            body: { key, value, is_build_time: is_build_time || false },
-          }));
-        case "update_bulk":
-          return ok(await coolifyFetch(`${basePath}/bulk`, {
-            method: "PATCH",
-            body: data,
-          }));
+        case "create": {
+          const body = { key, value };
+          if (is_preview !== undefined) body.is_preview = is_preview;
+          if (is_literal !== undefined) body.is_literal = is_literal;
+          if (is_multiline !== undefined) body.is_multiline = is_multiline;
+          if (is_shown_once !== undefined) body.is_shown_once = is_shown_once;
+          return ok(await coolifyFetch(basePath, { method: "POST", body }));
+        }
+        case "update": {
+          const body = { key, value };
+          if (is_preview !== undefined) body.is_preview = is_preview;
+          if (is_literal !== undefined) body.is_literal = is_literal;
+          if (is_multiline !== undefined) body.is_multiline = is_multiline;
+          if (is_shown_once !== undefined) body.is_shown_once = is_shown_once;
+          return ok(await coolifyFetch(basePath, { method: "PATCH", body }));
+        }
+        case "update_bulk": {
+          // API expects { data: [{ key, value, ... }] }
+          const body = Array.isArray(data?.data) ? data : { data: Array.isArray(data) ? data : [] };
+          return ok(await coolifyFetch(`${basePath}/bulk`, { method: "PATCH", body }));
+        }
         case "delete":
           return ok(await coolifyFetch(`${basePath}/${env_uuid}`, {
             method: "DELETE",

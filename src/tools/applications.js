@@ -26,8 +26,15 @@ export function registerApplicationTools(server) {
           if (!source_type) return err("source_type is required for create action");
           return ok(await coolifyFetch(`/applications/${source_type}`, { method: "POST", body: data }));
         }
-        case "update":
-          return ok(await coolifyFetch(`/applications/${uuid}`, { method: "PATCH", body: data }));
+        case "update": {
+          // Coolify API uses 'domains' not 'fqdn' for updating application domains
+          const body = { ...data };
+          if (body.fqdn && !body.domains) {
+            body.domains = body.fqdn;
+            delete body.fqdn;
+          }
+          return ok(await coolifyFetch(`/applications/${uuid}`, { method: "PATCH", body }));
+        }
         case "delete":
           return ok(await coolifyFetch(`/applications/${uuid}`, { method: "DELETE" }));
         case "logs": {
