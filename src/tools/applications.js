@@ -5,7 +5,8 @@ import { ok, err } from "../helpers.js";
 export function registerApplicationTools(server) {
   server.tool(
     "applications",
-    "Manage applications: list, get, create (6 source types), update, delete, logs, start, stop, restart",
+    `Manage applications: list, get, create (6 source types), update, delete, logs, start, stop, restart.
+NOTE: For update, use 'domains' field not 'fqdn'. Tool auto-converts fqdn to domains for compatibility.`,
     {
       action: z.enum(["list", "get", "create", "update", "delete", "logs", "start", "stop", "restart"]),
       uuid: z.string().optional().describe("Application UUID"),
